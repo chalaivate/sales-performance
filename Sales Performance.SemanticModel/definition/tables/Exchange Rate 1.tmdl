@@ -1,0 +1,70 @@
+table 'Exchange Rate 1'
+	lineageTag: cd5475bc-318c-420f-bee8-f5893d37f858
+
+	column Currency
+		dataType: string
+		lineageTag: c4d94d4f-4183-4b4c-9561-e1e3fbd7007c
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 0bd5a6cd-8d3f-40f8-a97f-add7517e1136
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sight Bill'
+		dataType: double
+		lineageTag: e46fbf6d-f036-4585-a2db-52353052838f
+		summarizeBy: sum
+		sourceColumn: Sight Bill
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Transfer
+		dataType: double
+		lineageTag: a6fc674a-452a-4590-808a-7ccf9019ba84
+		summarizeBy: sum
+		sourceColumn: Transfer
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Selling Rate'
+		dataType: double
+		lineageTag: 41441793-4469-4870-a9bd-05fea1346a91
+		summarizeBy: sum
+		sourceColumn: Selling Rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Exchange Rate 1' = m
+		mode: import
+		source =
+				let
+				    Source = Web.BrowserContents("https://www.bot.or.th/en/statistics/exchange-rate.html"),
+				    #"Extracted Table From Html" = Html.Table(Source, {{"Column1", ".table-header TD"}, {"Column2", ".scroll-table-view H3"}, {"Column3", ".scroll-table-view P"}}, [RowSelector=".table-header .plus"]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Table From Html",{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Column3", "Country"}, {"Column2", "Currency"}}),
+				    #"Added Index" = Table.AddIndexColumn(#"Renamed Columns", "Index", 1, 1, Int64.Type),
+				    #"Merged Queries" = Table.NestedJoin(#"Added Index", {"Index"}, #"Exchange Rate 2", {"Index"}, "Exchange Rate 2", JoinKind.LeftOuter),
+				    #"Expanded Exchange Rate 2" = Table.ExpandTableColumn(#"Merged Queries", "Exchange Rate 2", {"Sight Bill", "Transfer", "Selling Rate"}, {"Sight Bill", "Transfer", "Selling Rate"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Expanded Exchange Rate 2",{"Index"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Removed Columns1",{"Country", "Currency", "Sight Bill", "Transfer", "Selling Rate"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

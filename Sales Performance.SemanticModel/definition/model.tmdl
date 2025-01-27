@@ -1,0 +1,50 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-GB
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'Transform File from Colors'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Transform File from Colors\Helper Queries'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transform File from Sales by Country'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Transform File from Sales by Country\Helper Queries'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Sales Performance'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["Sales","Sales2023","Countries","Clients","Colors","Sample File","Parameter1","Transform Sample File","Transform File","Sales by Country","Exchange Rate 1","Sample File (2)","Parameter2","Transform Sample File (2)","Transform File (2)","Exchange Rate 2","Continents","DimDate"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.139.1678.0 (24.12)+2a034ab280bddf891eb7bb9ebfe6996f9c3a3196
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+ref table Sales
+ref table DateTableTemplate_cde8516a-511c-40ac-b9d5-63d578465e87
+ref table LocalDateTable_92d7399c-f735-408e-b5cf-c36215081023
+ref table Countries
+ref table Clients
+ref table LocalDateTable_512dbaf1-fd31-4c91-ba03-77364a38a602
+ref table Colors
+ref table 'Sales by Country'
+ref table 'Exchange Rate 1'
+ref table DimDate
+ref table LocalDateTable_76330710-85e5-4ae5-8817-785ec8fd31f7
+
+ref cultureInfo en-US
+

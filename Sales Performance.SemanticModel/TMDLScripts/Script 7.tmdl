@@ -1,0 +1,288 @@
+createOrReplace
+
+	table Sales
+		lineageTag: 897c9625-9164-4932-9c8c-53711179a063
+
+		measure 'Total Sales' = SUM(Sales[NetSales]) //ยอดขายสุทธิรวม
+			formatString: #,0.00
+			lineageTag: 8abee3be-a6bd-4b7d-b496-c6a3fd54846d
+
+		measure 'Total Costs' = SUM(Sales[CostPrice]) //ต้นทุนรวม
+			formatString: #,0.00
+			lineageTag: 5ec80c1a-3fb5-4000-88d2-cdf3f91bbc8e
+
+		measure Margin = [Total Sales] - [Total Costs] //กำไร
+			formatString: #,0.00
+			lineageTag: fbfb8d7d-21a4-45a6-ad7b-70a6a0e7942e
+
+		measure %Margin = DIVIDE([Margin],[Total Sales],"No Sale")
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 5ad562ce-4148-498c-9cee-6d066ca57091
+
+		column InvoiceDate
+			dataType: dateTime
+			formatString: dd-mmm-yy
+			lineageTag: 1a50ad02-86f3-4823-bce8-94ad6fc9ae60
+			summarizeBy: none
+			sourceColumn: InvoiceDate
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation UnderlyingDateTimeDataType = Date
+
+			annotation PBI_FormatHint = {"isCustom":true}
+
+		column TotalDiscount
+			dataType: double
+			formatString: #,0.00
+			lineageTag: 2ebbd251-48a6-4831-9f61-bc21f8d32366
+			summarizeBy: sum
+			sourceColumn: TotalDiscount
+
+			annotation SummarizationSetBy = Automatic
+
+		column DeliveryCharge
+			dataType: int64
+			formatString: #,0
+			lineageTag: 5e7b2310-76e1-4bb7-84f3-7573dab0da60
+			summarizeBy: sum
+			sourceColumn: DeliveryCharge
+
+			annotation SummarizationSetBy = Automatic
+
+		column SalePrice
+			dataType: int64
+			formatString: #,0
+			lineageTag: 15875292-f00b-46e9-b70e-18b84d55c7fc
+			summarizeBy: sum
+			sourceColumn: SalePrice
+
+			annotation SummarizationSetBy = Automatic
+
+		column Make
+			dataType: string
+			lineageTag: 8c3273a4-b6c1-4eb1-8da4-9e6941128a35
+			summarizeBy: none
+			sourceColumn: Make
+
+			annotation SummarizationSetBy = Automatic
+
+		column Marque
+			dataType: string
+			lineageTag: e12ab141-f788-41d5-ad8c-3625fd096f80
+			summarizeBy: none
+			sourceColumn: Marque
+
+			annotation SummarizationSetBy = Automatic
+
+		column CostPrice
+			dataType: int64
+			formatString: #,0
+			lineageTag: c6edc60d-a447-4230-a8c4-f9e1e4045402
+			summarizeBy: sum
+			sourceColumn: CostPrice
+
+			annotation SummarizationSetBy = Automatic
+
+		column ColourID
+			dataType: int64
+			formatString: 0
+			lineageTag: 6f46ae6c-afc7-45d1-b24c-bd5535f01c2a
+			summarizeBy: none
+			sourceColumn: ColourID
+
+			annotation SummarizationSetBy = Automatic
+
+		column ClientID
+			dataType: int64
+			formatString: 0
+			lineageTag: d36ca224-17e9-45df-a767-f5a9f7a94cd6
+			summarizeBy: none
+			sourceColumn: ClientID
+
+			annotation SummarizationSetBy = Automatic
+
+		column LabourCost
+			dataType: int64
+			formatString: #,0
+			lineageTag: 1a0f8f2a-1126-4b9b-9d00-a34baf8de6d8
+			summarizeBy: sum
+			sourceColumn: LabourCost
+
+			annotation SummarizationSetBy = Automatic
+
+		column SpareParts
+			dataType: int64
+			formatString: #,0
+			lineageTag: b6864610-72d2-4345-b6df-ce4f78978c4e
+			summarizeBy: sum
+			sourceColumn: SpareParts
+
+			annotation SummarizationSetBy = Automatic
+
+		column Registration_Date
+			dataType: dateTime
+			formatString: dd-mmm-yy
+			lineageTag: c7318d55-55f1-43b4-9e01-2349caba5de1
+			summarizeBy: none
+			sourceColumn: Registration_Date
+
+			variation Variation
+				isDefault
+				relationship: d58a3fb4-fd83-46f0-8982-e2b5cb215e44
+				defaultHierarchy: LocalDateTable_92d7399c-f735-408e-b5cf-c36215081023.'Date Hierarchy'
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation UnderlyingDateTimeDataType = Date
+
+			annotation PBI_FormatHint = {"isCustom":true}
+
+		column MileageRange
+			dataType: string
+			lineageTag: 9bcfd805-9626-4ba8-b491-b1f2c75849e4
+			summarizeBy: none
+			sourceColumn: MileageRange
+
+			annotation SummarizationSetBy = Automatic
+
+		column MileageRangeSort
+			dataType: int64
+			formatString: 0
+			lineageTag: ea91c388-aa8b-449c-b66e-b4e1cce64935
+			summarizeBy: sum
+			sourceColumn: MileageRangeSort
+
+			annotation SummarizationSetBy = Automatic
+
+		column VehicleType
+			dataType: string
+			lineageTag: 0bca91da-dfd6-4e68-8b54-00398f420ef1
+			summarizeBy: none
+			sourceColumn: VehicleType
+
+			annotation SummarizationSetBy = Automatic
+
+		column InvoiceNumber
+			dataType: int64
+			formatString: 0
+			lineageTag: 3a3baa63-a63b-4d2f-88e1-69bb60c479a5
+			summarizeBy: count
+			sourceColumn: InvoiceNumber
+
+			annotation SummarizationSetBy = User
+
+		column Vehicle
+			dataType: string
+			lineageTag: 0941cebb-a7e0-44bb-8892-4ce9ebde2374
+			summarizeBy: none
+			sourceColumn: Vehicle
+
+			annotation SummarizationSetBy = Automatic
+
+		column NetSales
+			dataType: double
+			formatString: #,0.00
+			lineageTag: eff83886-b0d6-4413-82b6-50d108724bde
+			summarizeBy: sum
+			sourceColumn: NetSales
+
+			annotation SummarizationSetBy = Automatic
+
+		column GrossMargin
+			dataType: double
+			formatString: #,0.00
+			lineageTag: f94a7b57-f013-4f08-8a3b-84a279d88082
+			summarizeBy: sum
+			sourceColumn: GrossMargin
+
+			annotation SummarizationSetBy = Automatic
+
+		column DirectCost
+			dataType: double
+			formatString: #,0.00
+			lineageTag: c208fd82-0aee-4ff7-a183-1bbb5ef31a05
+			summarizeBy: sum
+			sourceColumn: DirectCost
+
+			annotation SummarizationSetBy = Automatic
+
+		column NetMargin
+			dataType: double
+			formatString: #,0.00
+			lineageTag: f5510fea-60bf-4f99-bc13-ad7f19c45f8f
+			summarizeBy: sum
+			sourceColumn: NetMargin
+
+			annotation SummarizationSetBy = Automatic
+
+		column SalesCosts
+			dataType: double
+			formatString: #,0.00
+			lineageTag: ab5dee6b-5db0-4e3d-b8cb-252e32ac52d9
+			summarizeBy: sum
+			sourceColumn: SalesCosts
+
+			annotation SummarizationSetBy = Automatic
+
+		column VehicleAge = DATEDIFF(Sales[Registration_Date],Sales[InvoiceDate],YEAR)
+			formatString: 0
+			lineageTag: bc8e86f2-7325-4ee7-9ca4-5ca956b7e90a
+			summarizeBy: sum
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Vehicle Age Category' =
+				
+				IF([VehicleAge] <= 5, "Under 5",
+				IF([VehicleAge] <=10, "6-10",
+				IF([VehicleAge] <=15, "11-15",
+				IF([VehicleAge] <=20, "16-20",
+				IF([VehicleAge] <=25, "21-25",
+				IF([VehicleAge] <=30, "26-30", "Over 30"))))))
+			lineageTag: 8ecd390d-1200-47d7-a031-2b604aad7f57
+			summarizeBy: none
+			sortByColumn: 'Vehicle Age Category Sort'
+
+			changedProperty = SortByColumn
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'Vehicle Age Category Sort' =
+				
+				IF( [VehicleAge] <= 5, 1,
+				IF( [VehicleAge] <=10, 2,
+				IF( [VehicleAge] <=15, 3,
+				IF( [VehicleAge] <=20, 4,
+				IF( [VehicleAge] <=25, 5,
+				IF( [VehicleAge] <=30, 6, 7))))))
+			formatString: 0
+			lineageTag: d3b204b0-ab80-4c65-ade8-41322c010869
+			summarizeBy: sum
+
+			annotation SummarizationSetBy = Automatic
+
+		partition Sales = m
+			mode: import
+			queryGroup: 'Sales Performance'
+			source =
+					let
+					    Source = Excel.Workbook(File.Contents("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Datasources\SalesData.xlsx"), null, true),
+					    Sales2021_2022_Sheet = Source{[Item="Sales2021_2022",Kind="Sheet"]}[Data],
+					    #"Promoted Headers" = Table.PromoteHeaders(Sales2021_2022_Sheet, [PromoteAllScalars=true]),
+					    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"InvoiceDate", type date}, {"TotalDiscount", type number}, {"DeliveryCharge", Int64.Type}, {"SalePrice", Int64.Type}, {"Make", type text}, {"Marque", type text}, {"CostPrice", Int64.Type}, {"ColourID", Int64.Type}, {"ClientID", Int64.Type}, {"LabourCost", Int64.Type}, {"SpareParts", Int64.Type}, {"Registration_Date", type date}, {"MileageRange", type text}, {"MileageRangeSort", Int64.Type}, {"VehicleType", type text}, {"InvoiceNumber", Int64.Type}}),
+					    #"Appended Query - Sales 2023" = Table.Combine({#"Changed Type", Sales2023}),
+					    #"Inserted Merged Column" = Table.AddColumn(#"Appended Query - Sales 2023", "Vehicle", each Text.Combine({[Make], " ", [Marque]}), type text),
+					    #"Added Custom" = Table.AddColumn(#"Inserted Merged Column", "NetSales", each [SalePrice]-([TotalDiscount]+[DeliveryCharge])),
+					    #"Added Custom1" = Table.AddColumn(#"Added Custom", "GrossMargin", each [NetSales]-[CostPrice]),
+					    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "DirectCost", each [LabourCost]+[SpareParts]),
+					    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "NetMargin", each [GrossMargin]-[DirectCost]),
+					    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "SalesCosts", each [TotalDiscount]+[DeliveryCharge]),
+					    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom4",{{"NetSales", type number}, {"GrossMargin", type number}, {"DirectCost", type number}, {"NetMargin", type number}, {"SalesCosts", type number}})
+					in
+					    #"Changed Type1"
+
+		annotation PBI_ResultType = Table
+
+		annotation PBI_NavigationStepName = Navigation
+

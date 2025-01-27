@@ -1,0 +1,13 @@
+createOrReplace
+
+	ref table Sales
+
+		column GrossMargin
+			dataType: double
+			formatString: #,0.00
+			lineageTag: f94a7b57-f013-4f08-8a3b-84a279d88082
+			summarizeBy: sum
+			sourceColumn: GrossMargin
+
+			annotation SummarizationSetBy = Automatic
+

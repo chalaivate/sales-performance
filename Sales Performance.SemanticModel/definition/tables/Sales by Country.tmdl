@@ -1,0 +1,65 @@
+table 'Sales by Country'
+	lineageTag: 6066cea7-fec8-4250-9e2f-315f086bced1
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: 72916ebf-c5ba-4629-b07b-751221dca1f1
+		summarizeBy: count
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: string
+		lineageTag: 331e26e0-952e-469d-95a9-4084a69aeb5e
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units
+		dataType: int64
+		formatString: #,0
+		lineageTag: 908b4a25-41a1-4455-ab7e-52c672e42dd8
+		summarizeBy: sum
+		sourceColumn: Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 93f2a474-4f18-4f3f-969e-f0b920a2f15e
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 4a00aec9-dd90-4800-9e5c-576b50ed9fa0
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sales by Country' = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Sales by Country"),
+				    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+				    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File (2)", each #"Transform File (2)"([Content])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File (2)"}),
+				    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File (2)", Table.ColumnNames(#"Transform File (2)"(#"Sample File (2)"))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"ProductID", Int64.Type}, {"Date", type text}, {"Zip", type text}, {"Units", Int64.Type}, {"Revenue", type number}, {"Country", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Source.Name", "Zip"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

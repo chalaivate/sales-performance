@@ -1,0 +1,8 @@
+createOrReplace
+
+	ref table Sales
+
+		measure %Margin = DIVIDE([Margin],[Total Sales],"No Sale")
+			formatString: 0.00%;-0.00%;0.00%
+			lineageTag: 5ad562ce-4148-498c-9cee-6d066ca57091
+

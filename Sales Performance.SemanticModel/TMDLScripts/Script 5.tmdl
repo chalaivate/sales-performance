@@ -1,0 +1,8 @@
+createOrReplace
+
+	ref table Sales
+
+		measure 'Total Sales' = SUM(Sales[NetSales]) //ยอดขายสุทธิรวม
+			formatString: #,0.00
+			lineageTag: 8abee3be-a6bd-4b7d-b496-c6a3fd54846d
+

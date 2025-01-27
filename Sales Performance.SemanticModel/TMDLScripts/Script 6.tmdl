@@ -1,0 +1,6 @@
+createOrReplace
+
+	relationship AutoDetected_f0438b96-7c00-4b29-8fb8-69fb87c6c2c1
+		fromColumn: Clients.CountryID
+		toColumn: Countries.CountryID
+

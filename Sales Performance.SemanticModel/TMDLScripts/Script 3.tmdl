@@ -1,0 +1,42 @@
+createOrReplace
+
+	table Colors
+		lineageTag: 28c133be-572f-4ca5-b9fa-b97462851dc0
+
+		column ColorID
+			dataType: int64
+			formatString: 0
+			lineageTag: 9bc8367e-9e3b-4f5c-aeb6-8ef8d6a26eb7
+			summarizeBy: none
+			sourceColumn: ColorID
+
+			annotation SummarizationSetBy = Automatic
+
+		column Color
+			dataType: string
+			lineageTag: d6809c98-9dfe-44f2-9d39-64675dd71d0c
+			summarizeBy: none
+			sourceColumn: Color
+
+			annotation SummarizationSetBy = Automatic
+
+		partition Colors = m
+			mode: import
+			queryGroup: 'Sales Performance'
+			source =
+					let
+					    Source = Folder.Files("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Datasources\Colors"),
+					    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+					    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File", each #"Transform File"([Content])),
+					    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+					    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File"}),
+					    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File", Table.ColumnNames(#"Transform File"(#"Sample File"))),
+					    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"ColorID", Int64.Type}, {"Color", type text}}),
+					    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Source.Name"})
+					in
+					    #"Removed Columns"
+
+		annotation PBI_ResultType = Table
+
+		annotation PBI_NavigationStepName = Navigation
+

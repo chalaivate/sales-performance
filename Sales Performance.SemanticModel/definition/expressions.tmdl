@@ -1,0 +1,135 @@
+expression 'Transform Sample File' =
+		let
+		    Source = Csv.Document(Parameter1,[Delimiter="	", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: c7bd24b4-1786-4940-8776-dd1aa4228a19
+	queryGroup: 'Transform File from Colors'
+
+	annotation PBI_ResultType = Table
+
+expression Parameter1 = #"Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: a4b81067-5195-44ab-870a-d3b0a72c26af
+	queryGroup: 'Transform File from Colors\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Sample File' =
+		let
+		    Source = Folder.Files("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Datasources\Colors"),
+		    Navigation1 = Source{0}[Content]
+		in
+		    Navigation1
+	lineageTag: 4911f526-a946-4d7b-adb4-27190d010ec6
+	queryGroup: 'Transform File from Colors\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transform File' =
+		let
+		    Source = (Parameter1 as binary) => let
+		    Source = Csv.Document(Parameter1,[Delimiter="	", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+		in
+		    Source
+	lineageTag: f3aebcee-3b7d-48c3-9c2a-0be91a4378a6
+	queryGroup: 'Transform File from Colors\Helper Queries'
+
+	annotation PBI_ResultType = Function
+
+expression 'Transform Sample File (2)' =
+		let
+		    Source = Csv.Document(Parameter2,[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: 1afb6985-45c1-4682-9906-36bd4aca2578
+	queryGroup: 'Transform File from Sales by Country'
+
+	annotation PBI_ResultType = Table
+
+expression Parameter2 = #"Sample File (2)" meta [IsParameterQuery=true, BinaryIdentifier=#"Sample File (2)", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: f1f9cdc2-8cc1-45fe-9cbb-f3fb9e8ea6f0
+	queryGroup: 'Transform File from Sales by Country\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Sample File (2)' =
+		let
+		    Source = Folder.Files("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Sales by Country"),
+		    Navigation1 = Source{0}[Content]
+		in
+		    Navigation1
+	lineageTag: edc8dbe5-e5a1-48e2-8fd1-29ec9803c467
+	queryGroup: 'Transform File from Sales by Country\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transform File (2)' =
+		let
+		    Source = (Parameter2 as binary) => let
+		    Source = Csv.Document(Parameter2,[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+		in
+		    Source
+	lineageTag: 9634c5ae-36ce-4edb-b934-758682abf0af
+	queryGroup: 'Transform File from Sales by Country\Helper Queries'
+
+	annotation PBI_ResultType = Function
+
+expression Continents =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Country|Continent" = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Country|Continent", type text}}),
+		    #"Split Column by Delimiter" = Table.SplitColumn(#"Changed Type", "Country|Continent", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), {"Country|Continent.1", "Country|Continent.2"}),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Country|Continent.1", type text}, {"Country|Continent.2", type text}}),
+		    #"Trimmed Text" = Table.TransformColumns(#"Changed Type1",{{"Country|Continent.1", Text.Trim, type text}, {"Country|Continent.2", Text.Trim, type text}}),
+		    #"Capitalized Each Word" = Table.TransformColumns(#"Trimmed Text",{{"Country|Continent.2", Text.Proper, type text}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Capitalized Each Word",{{"Country|Continent.1", "Country"}, {"Country|Continent.2", "Continent"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 4eae0178-3d24-4c69-bd66-fd43ef6fd22b
+	queryGroup: 'Sales Performance'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Exchange Rate 2' =
+		let
+		    Source = Web.BrowserContents("https://www.bot.or.th/en/statistics/exchange-rate.html"),
+		    #"Extracted Table From Html" = Html.Table(Source, {{"Column1", "DIV.table-content > TABLE > * > TR > TH[colspan=""2""]:not([rowspan]):nth-child(1):nth-last-child(2), DIV.table-content > TABLE > * > TR > TH:not([colspan]):not([rowspan]):nth-child(1):nth-last-child(2), DIV.table-content > TABLE > * > TR > TD:not([colspan]):not([rowspan]):nth-child(1):nth-last-child(3)"}, {"Column2", "DIV.table-content > TABLE > * > TR > TH[colspan=""2""]:not([rowspan]):nth-child(1):nth-last-child(2), DIV.table-content > TABLE > * > TR > TH:not([colspan]):not([rowspan]):nth-child(1):nth-last-child(2) + TH:not([colspan]):not([rowspan]):nth-child(2):nth-last-child(1), DIV.table-content > TABLE > * > TR > TD:not([colspan]):not([rowspan]):nth-child(1):nth-last-child(3) + TD:not([colspan]):not([rowspan]):nth-child(2):nth-last-child(2)"}, {"Column3", "DIV.table-content > TABLE > * > TR > TH[colspan=""2""]:not([rowspan]):nth-child(1):nth-last-child(2) + TH[rowspan=""2""]:not([colspan]):nth-child(2):nth-last-child(1), DIV.table-content > TABLE > * > TR > TD:not([colspan]):not([rowspan]):nth-child(1):nth-last-child(3) + TD:not([colspan]):not([rowspan]):nth-child(2):nth-last-child(2) + TD:not([colspan]):not([rowspan]):nth-child(3):nth-last-child(1)"}}, [RowSelector="DIV.table-content > TABLE > * > TR"]),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Extracted Table From Html", [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Average Buying Rate", type text}, {"Average Buying Rate_1", type text}, {"Average Selling Rates", type number}}),
+		    #"Promoted Headers1" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers1",{{"Sight Bill", type number}, {"Transfer", type number}, {"Column3", type number}}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Column3", "Selling Rate"}}),
+		    #"Added Index" = Table.AddIndexColumn(#"Renamed Columns", "Index", 1, 1, Int64.Type)
+		in
+		    #"Added Index"
+	lineageTag: 05d8062e-1284-4ba5-a9ab-599d50aab5bb
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Sales2023 =
+		let
+		    Source = Excel.Workbook(File.Contents("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Datasources\SalesData2023.xlsx"), null, true),
+		    Sales2023_Sheet = Source{[Item="Sales2023",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(Sales2023_Sheet, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"InvoiceDate", type date}, {"TotalDiscount", type number}, {"DeliveryCharge", Int64.Type}, {"SalePrice", Int64.Type}, {"Make", type text}, {"Marque", type text}, {"CostPrice", Int64.Type}, {"ColourID", Int64.Type}, {"ClientID", Int64.Type}, {"LabourCost", Int64.Type}, {"SpareParts", Int64.Type}, {"Registration_Date", type date}, {"MileageRange", type text}, {"MileageRangeSort", Int64.Type}, {"VehicleType", type text}, {"InvoiceNumber", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 279fff20-c1fc-4f27-a394-e70f3ab89611
+	queryGroup: 'Sales Performance'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

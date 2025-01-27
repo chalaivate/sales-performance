@@ -1,0 +1,31 @@
+relationship d58a3fb4-fd83-46f0-8982-e2b5cb215e44
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.Registration_Date
+	toColumn: LocalDateTable_92d7399c-f735-408e-b5cf-c36215081023.Date
+
+relationship b608644a-790a-4dbe-a5e5-93f08f6526f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Clients.ClientSince
+	toColumn: LocalDateTable_512dbaf1-fd31-4c91-ba03-77364a38a602.Date
+
+relationship AutoDetected_df8d009b-9e68-45a9-ac1a-9f9913b117b3
+	fromColumn: Sales.ClientID
+	toColumn: Clients.ClientID
+
+relationship AutoDetected_f0438b96-7c00-4b29-8fb8-69fb87c6c2c1
+	fromColumn: Clients.CountryID
+	toColumn: Countries.CountryID
+
+relationship 316acbc3-9d63-4ae7-99b4-16ca92f354fc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimDate.DateKey
+	toColumn: LocalDateTable_76330710-85e5-4ae5-8817-785ec8fd31f7.Date
+
+relationship 1d61ec80-1fe4-2da3-6bf6-cd1a126e7294
+	fromColumn: Sales.ColourID
+	toColumn: Colors.ColorID
+
+relationship 46476baf-1c0a-edc3-3c60-bfc8b6bfdf2e
+	fromColumn: Sales.InvoiceDate
+	toColumn: DimDate.DateKey
+

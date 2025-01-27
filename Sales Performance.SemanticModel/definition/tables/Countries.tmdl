@@ -1,0 +1,64 @@
+table Countries
+	lineageTag: da0aeacd-df1a-4044-9773-f3e1450d4614
+
+	column CountryID
+		dataType: int64
+		formatString: 0
+		lineageTag: ae09da08-2d85-40fb-9214-88c314dd1151
+		summarizeBy: none
+		sourceColumn: CountryID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryName
+		dataType: string
+		lineageTag: 21aa59ba-f9ca-46d8-9580-ad843f811e59
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: CountryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryName_Local
+		dataType: string
+		lineageTag: 76874d70-50fe-4f8a-8674-48d480e0623f
+		summarizeBy: none
+		sourceColumn: CountryName_Local
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryFlagURL
+		dataType: string
+		lineageTag: d0450b89-5911-4a37-9cea-462223bcac9b
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: CountryFlagURL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: cd31fff3-25e4-4608-927b-8774b530a186
+		dataCategory: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Countries = m
+		mode: import
+		queryGroup: 'Sales Performance'
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\9EXPERT-Case Study Power BI Desktop-Version 30\Datasources\Countries.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CountryID", Int64.Type}, {"CountryName", type text}, {"CountryName_Local", type text}, {"CountryFlagURL", type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"CountryName"}, Continents, {"Country"}, "Continents", JoinKind.LeftOuter),
+				    #"Expanded Continents" = Table.ExpandTableColumn(#"Merged Queries", "Continents", {"Continent"}, {"Continent"})
+				in
+				    #"Expanded Continents"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

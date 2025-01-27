@@ -1,0 +1,192 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 249.20124531579637,
+            "y": 291.61394771254265
+          },
+          "nodeIndex": "Countries",
+          "nodeLineageTag": "da0aeacd-df1a-4044-9773-f3e1450d4614",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 478,
+            "y": 0
+          },
+          "nodeIndex": "Clients",
+          "nodeLineageTag": "a44a4b4c-64ac-465a-b521-ab36020220ea",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 744,
+            "y": 0
+          },
+          "nodeIndex": "Colors",
+          "nodeLineageTag": "28c133be-572f-4ca5-b9fa-b97462851dc0",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1315.4901625320788,
+            "y": 48.720273738237815
+          },
+          "nodeIndex": "Sales by Country",
+          "nodeLineageTag": "6066cea7-fec8-4250-9e2f-315f086bced1",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 770.1967493584259,
+            "y": 210.32164242942687
+          },
+          "nodeIndex": "Exchange Rate 1",
+          "nodeLineageTag": "cd5475bc-318c-420f-bee8-f5893d37f858",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Sales",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1036.017108639863,
+            "y": 31.808383233532936
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "de66d818-9c9e-4073-93ff-1f868410ef59",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 68.785334906458132,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 41.666666666666664
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 428.33333333333326,
+            "y": 99.4444444444444
+          },
+          "nodeIndex": "Sales",
+          "nodeLineageTag": "897c9625-9164-4932-9c8c-53711179a063",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 41,
+            "y": 0
+          },
+          "nodeIndex": "Clients",
+          "nodeLineageTag": "a44a4b4c-64ac-465a-b521-ab36020220ea",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 88.888888888888886,
+            "y": 358
+          },
+          "nodeIndex": "Countries",
+          "nodeLineageTag": "da0aeacd-df1a-4044-9773-f3e1450d4614",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 752.44444444444446,
+            "y": 51.111111111111114
+          },
+          "nodeIndex": "Colors",
+          "nodeLineageTag": "28c133be-572f-4ca5-b9fa-b97462851dc0",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 756.88888888888891,
+            "y": 228.88888888888889
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "de66d818-9c9e-4073-93ff-1f868410ef59",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Sales Performance",
+      "zoomValue": 90,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Sales Performance",
+  "defaultDiagram": "All tables"
+}
